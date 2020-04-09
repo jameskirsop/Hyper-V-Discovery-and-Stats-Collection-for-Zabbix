@@ -20,7 +20,7 @@ Within the `C:\zabbixWorkingFolder` directory, you'll need an extracted copy of 
 Files in the `collectors` directory can live in your `zabbixWorkingFolder` and be setup as Scheduled Tasks. Here is some sample PowerShell commands to set up a Scheduled Task. Adjust the `-ClusterNames`, `domain\username` and `New-TimeSpam -Minutes 30` and `Register-ScheduledTask` Name sections to taste
 ```
 $action = New-ScheduledTaskAction -Execute powershell.exe -Argument "-noprofile -Command `"C:\zabbixWorkingFolder\cpu_discovery_collector.ps1 -ClusterNames 'sampleClusterName1','sampleClusterName2'`""
-$principal = New-ScheduledTaskPrincipal -UserId dr\zabbix.agent -LogonType Password -RunLevel Highest
+$principal = New-ScheduledTaskPrincipal -UserId domain\username -LogonType Password -RunLevel Highest
 $trigger = New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (New-TimeSpan -Minutes 30) 
 $credential = $Host.UI.PromptForCredential("Task creds","Enter details","","domain\username")
 Register-ScheduledTask "Collect Zabbix Agent VM Disk Discovery - DR Clusters" –Action $action –Trigger $trigger –User $credential.UserName -Password $credential.GetNetworkCredential().Password
