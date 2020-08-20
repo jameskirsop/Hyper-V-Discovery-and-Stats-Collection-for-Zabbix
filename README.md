@@ -41,3 +41,6 @@ UserParameter=hyperv_cpustats[*],C:\zabbixWorkingFolder\python37e\python "C:\Pro
 UserParameter=hyperv_diskdiscovery[*],C:\zabbixWorkingFolder\python37e\python "C:\Program Files\ZabbixAgent\conf\userparams\discovery_disk.py" "$1"
 UserParameter=hyperv_diskstats_v2[*],C:\zabbixWorkingFolder\python37e\python "C:\Program Files\ZabbixAgent\conf\userparams\statcollection_disk_v2.py" "$1" "$2"
 ```
+
+## Performance Counter Weirdness
+We've discovered that in some instances, the names of the hosts represented in Performance Counters differ from the current name of the VM. The `perfCounterCrosscheck.ps` script can be used to produce a list of VM's performance counters where they don't match an known VM name on the cluster.
